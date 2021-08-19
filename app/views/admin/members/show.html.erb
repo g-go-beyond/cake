@@ -1,0 +1,43 @@
+<h1><%= @member.last_name %><%= @member.first_name %>さんの会員詳細</h1>
+
+<table>
+ <tr>
+  <th>会員ID</th>
+  <td><%= @member.id %></td>
+ </tr>
+ <tr>
+  <th>氏名</th>
+  <td><%= @member.last_name %><%= @member.first_name %></td>
+ </tr>
+ <tr>
+  <th>フリガナ</th>
+  <td><%= @member.last_name_kana %><%= @member.first_name_kana %></td>
+ </tr>
+ <tr>
+  <th>郵便番号</th>
+  <td><%= @member.post_code %></td>
+ </tr>
+ <tr>
+  <th>住所</th>
+  <td><%= @member.address %></td>
+ </tr>
+ <tr>
+  <th>電話番号</th>
+  <td><%= @member.phone_number %></td>
+ </tr>
+ <tr>
+  <th>メールアドレス</th>
+  <td><%= @member.email %></td>
+ </tr>
+ <tr>
+  <th>会員ステータス</th>
+  <td> <% if @member.is_deleted == true %>
+       <p>退会</p>
+            <% else %>
+            <p>有効</p>
+            <% end %></td>
+ </tr>
+</table>
+
+<%= link_to "編集する", edit_member_path(@member) %><br>
+<%= link_to "注文履歴一覧（リンクなし）", edit_member_path(@member) %>
