@@ -3,8 +3,9 @@ Rails.application.routes.draw do
     #devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  # 会員側のルーティング設定
+ 
   scope module: :member do
-      resources :addresses, :except => [:new]  
+    resources :addresses, :except => [:new]  
       # resources :members,only: [:show,:edit,:update] do
       #   collection do
       #     get ’unsubscribe’
@@ -38,9 +39,9 @@ Rails.application.routes.draw do
     passwords: 'members/passwords'}
 
 # 管理者側のルーティング設定
-  scope module: :admin do
+  namespace :admin do
     resources :members, :except => [:new,:destroy]
-    resources :items, :except => [:destroy]
+    resources :items, :except => [:destroy] 
     resources :genres, :except => [:new,:show,:destroy]
     resources :orders,only: [:show,:update,:index]
     resources :ordered_items,only: [:update] 
@@ -50,5 +51,4 @@ Rails.application.routes.draw do
       sessions: 'admins/sessions',
       registrations: 'admins/registrations',
       passwords: 'admins/passwords'}
-  
 end

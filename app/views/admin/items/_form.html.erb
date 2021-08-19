@@ -1,0 +1,30 @@
+<%= form_with model: item, local: true do |f| %>
+  <% if item.errors.any? %>
+    <%= item.errors.count %> errors prohibited this item from being saved:<br>
+      <% item.errors.full_messages.each do |message| %>
+        ・<%= message %><br>
+      <% end %>
+  <% end %>
+  <table>
+    <tr><th>商品画像</th><td>Gemにrefile入れてから<!--f.attachment_field :image_id --></td></tr>
+    <tr><th>商品名</th><td><%= f.text_field :name, :placeholder => "商品名" %></td></tr>
+    <tr><th>商品説明</th><td><%= f.text_area :description, placeholder:"ここに説明文を記述します" %></td></tr>
+    <tr><th>ジャンル</th><td>genre選択></td></tr>
+    <tr><th>税抜価格</th><td><%= f.text_field :price %></td></tr>
+    <tr><th>販売ステータス</th><td>
+          <%= f.radio_button :title, 1 %>
+          <%= f.label :title, "販売中", value:1%>
+          <%= f.radio_button :title, 2 %>
+          <%= f.label :title, "販売停止中", value:2%>
+        </td></tr>
+    <tr><th></th><td>
+      <button type="submit" class="btn btn-success">
+        <% if local_assigns[:edit_flag].present? %>
+            <% f.submit %>変更を保存
+        <% else %>
+            <% f.submit %>新規登録
+        <% end %>
+      </button>
+    </td></tr>
+  </table>
+<% end %>
