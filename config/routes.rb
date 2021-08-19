@@ -3,40 +3,52 @@ Rails.application.routes.draw do
     #devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  # 会員側のルーティング設定
-  namespace :member do
-    resources :members
-  
-  #get 'items' => 'member/items#index'
-  #get 'items/:id' => 'member/items#show'
+  scope module: :member do
+      resources :addresses, :except => [:new]  
+      # resources :members,only: [:show,:edit,:update] do
+      #   collection do
+      #     get ’unsubscribe’
+      #     patch ’withdraw’
+      #   end
+      # end
+    resources :items,only: [:show,:index] do
+      # collection do
+      #   get ’top’
+      #   get ’about’
+      # end
+    end
 
-  #get 'members/:id' => 'member/members#show'
-  #get 'members/:id/edit' => 'member/members#edit'
+    resources :cart_items,only: [:index,:create,:update,:destroy] do
+      # collection do
+      #   delete ’all_destroy’
+      # end
+    end
+    
+    resources :orders,only: [:show,:edit,:update,:create] do
+      # collection do
+      # get ’thanx’
+      # post ’confirm’
+      # end
+    end
 
-  #get 'orders' => 'member/orders#index'
-  #get 'orders/:id' => 'member/orders#show'
-  devise_for :member,controllers: {
-      sessions: 'members/sessions',
-      registrations: 'members/registrations',
-      passwords: 'members/passwords'}
   end
+  devise_for :member,controllers: {
+    sessions: 'members/sessions',
+    registrations: 'members/registrations',
+    passwords: 'members/passwords'}
+
 # 管理者側のルーティング設定
-  namespace :admin do
-    resources :members
-    resources :items
-    resources :genres
-  
-    #get 'items' => 'admin/items#index' #view作ってから
-    #get 'items/:id' => 'admin/items#show'
-
-    #get 'members/:id' => 'admin/items#show'
-    #get 'members/:id/edit' => 'admin/items#edit'
-
-    #get 'orders' => 'admin/items#index'
-    #get 'orders/:id' => 'admin/items#show'
-
+  scope module: :admin do
+    resources :members, :except => [:new,:destroy]
+    resources :items, :except => [:destroy]
+    resources :genres, :except => [:new,:show,:destroy]
+    resources :orders,only: [:show,:update,:index]
+    resources :ordered_items,only: [:update] 
+  end
+    
     devise_for :admin,controllers: {
       sessions: 'admins/sessions',
       registrations: 'admins/registrations',
       passwords: 'admins/passwords'}
-  end
+  
 end
