@@ -13,6 +13,10 @@
 ActiveRecord::Schema.define(version: 2021_08_18_014830) do
 
   create_table "addresses", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.string "name", null: false
+    t.string "post_code", null: false
+    t.string "address", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
