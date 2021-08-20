@@ -1,0 +1,26 @@
+
+ <%= attachment_image_tag(@item, :image, fallback: "no_image.jpg", size: "100x100") %>
+
+    <h1 class ="item"><%= @item.name %><h1>
+      <p class = "item">
+        <%= @item.description %>
+      </pr>
+      <p class = "item">
+        <% if @item.is_active == TRUE %>
+         ￥<%= @item.tax_included_price.to_s(:dalimited) %>(税込)
+        <% else %> <!--modelにてdef設定↑-->
+         "sorry!sold out!"
+        <% end %>
+      </p>
+    <p>
+   <% if @item.is_active == true %>
+     <%= form_with (model: @cart_item,url: cart_items_path, method:post,local true)do |f| %>
+      <%= f.label :quantity, "個数選択" %>
+      <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10] %><!--個数指定ない-->
+       <%= f.hidden_field :id, :value => item.id %>
+       <%= f.submit "カートに入れる", class: "btn btn-scsess" %>
+     <% end %>
+   <%else%>
+     <p>"sorry!sold out!"</p>
+    <% end %>
+    </p>

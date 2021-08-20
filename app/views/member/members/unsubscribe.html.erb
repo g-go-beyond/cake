@@ -6,8 +6,7 @@
 </p>
 
 <div class="d-flex justify-content-around mt-5">
-  <%= link_to "退会しない",member_member_path,class:'btn btn-primary'%>
-  <%= link_to　"退会する/未設定",member_member_path,class:'btn btn-danger'%> 
+  <%= link_to "退会しない",member_path(current_member),class:'btn btn-primary'%>
+  <%= link_to "退会する/未設定",withdraw_members_path,method: :patch,class:'btn btn-danger'%>
 </div>
 
-<!--https://qiita.com/tomorun/items/d2c1e0a560d8aac3251b-->
