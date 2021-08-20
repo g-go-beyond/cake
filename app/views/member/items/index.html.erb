@@ -1,0 +1,7 @@
+<h1>商品一覧(全<%=item.total_count%>件</h1>
+<% @items.first(4).each do |item|%>
+<div class><%= attachment_image_tag(item, :image, fallback: "no_image.jpg", size: "80x100") %></div>
+ <p><%= item.name %></p>
+ <p>￥<%= item.tax_included_price.to_s(:dalimited) %>(税込)</p>
+<% end %>
+<%= paginate @items %>
