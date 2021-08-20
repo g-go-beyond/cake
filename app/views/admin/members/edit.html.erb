@@ -1,6 +1,6 @@
 <h1><%= @member.last_name %><%= @member.first_name %>さんの会員情報編集</h1>
 
-<%= form_with model:@member, url: member_path, local:true do |f| %>
+<%= form_with model:@member, url: admin_member_path, local:true do |f| %>
  <div>
     <%= f.label :会員ID %>
     <%= @member.id %>
