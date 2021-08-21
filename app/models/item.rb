@@ -5,9 +5,6 @@ class Item < ApplicationRecord
     belongs_to :genre
     attachment :image
     
-def tax_included_price
-  (item.price * 1.08).round
-end
     
     
 end

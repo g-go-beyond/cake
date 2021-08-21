@@ -8,4 +8,7 @@ class OrderedItem < ApplicationRecord
      "製作中":2,
      "製作終了":3
   }
+    def tax_included_price
+      (self.price * 1.08).round
+    end
 end

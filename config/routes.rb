@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     #devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  # 会員側のルーティング設定
- 
+ root 'member/items#top'
+ get 'about' => 'member/items#about'
   scope module: :member do
     resources :addresses, :except => [:new]  
       # resources :members,only: [:show,:edit,:update] do
@@ -12,12 +13,7 @@ Rails.application.routes.draw do
       #     patch ’withdraw’
       #   end
       # end
-    resources :items,only: [:show,:index] do
-      # collection do
-      #   get ’top’
-      #   get ’about’
-      # end
-    end
+    resources :items,only: [:show,:index] 
 
     resources :cart_items,only: [:index,:create,:update,:destroy] do
       collection do

@@ -9,12 +9,13 @@ class Member::ItemsController < ApplicationController
  
  def index
   @items = Item.all.order(created_at: :desc)
+  # @ordered_items = OrderedItems.all
  end
  
  def show
-  
   @item = Item.find(params[:id])
   @cart_item =CartItem
+  # @ordered_items = OrderedItems.all
  end
  
  #def create

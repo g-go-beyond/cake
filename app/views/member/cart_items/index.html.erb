@@ -1,12 +1,10 @@
 <div class='container'>
     <div class='row'>
-        <div class='col-3'>
+        <div class='col-4'>
             <h3>ショッピングカート</h3>
         </div>
-        <div class='col-3 offset-6'>
-            <button type="button" class="btn btn-danger btn-sm",class="text-white">
-                <%= link_to "カートを空にする", all_destroy_cart_items_path, method: :delete%>
-            </button>
+        <div class='col-3 offset-5'>
+            <%= link_to "カートを空にする", all_destroy_cart_items_path, method: :delete,class: "btn btn-danger btn-sm" %>
         </div>
     </div>
     <div class='row'>
@@ -21,43 +19,41 @@
                 </tr>
                 <!--合計金額totalの初期化-->
                 <% total = 0 %>
-                <% @cart_items.each do |item| %>
-                <tr>
-                    <td><%= item.name %></td>
-                    <td><%= item.price %></td>
-                    <td>
-                        <% form_with item, url: cart_item_path, method: :patch do |f| %>
-                            <%= f.select :quantity, options_for_select(@numbers, {selected: item.quantity.to_i} ) %>
-                            <button type="submit" class="btn btn-success">
-                                <%= f.submit "変更" %>
-                            </button>
-                        <% end %>
-                    </td>
-                    <td>
-                        <!--小計の計算-->
-                        <% subtotal = (item.price*item.quantity).to_i %>
-                        <!--小計を表示-->
-                        <%= subtotal %>
-                    </td>
-                    <td>
-                        <!--削除ボタン-->
-                        <button type="submit" class="btn btn-danger">
-                            <%= link_to "削除する", cart_item_path(cart_item.id, cart_item), method: :delete %>
-                        </button>
-                    </td>
-                </tr>
-                <!--アイテムごとに合計金額に加算する-->
-                <% total += subtotal %>
+                <!--カート内に商品があった場合に実行する-->
+                <% if current_member.cart_items.present? %>
+                    <% @cart_items.each do |cart_item| %> 
+                        <tr>
+                            <td><%= cart_item.item.name %></td>
+                            <td><%= (cart_item.item.price*1.08).to_i %></td>
+                            <td>
+                                <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true, method: :patch do |f| %>
+                                <!--f.select :name, options_for_select(セレクトボックスで表示したい要素配列.map{|c|[セレクトボックスで表示される値, value属性値にセットしたい値, {追加属性記述}]}, 初期値のvalueを選択), {}, {class: 'hoge', id: 'hogehoge'}-->
+                                     <!--f.select :quantity, options_for_select(@numbers.map{|c|selected: cart_item.quantity.to_i} ) %>-->
+                                    <%= f.number_field :quantity %>
+                                    <%= f.submit "変更",class: "btn btn-success" %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <!--小計の計算-->
+                                <% subtotal = ((cart_item.item.price*cart_item.quantity)*1.08).to_i %>
+                                <!--小計を表示-->
+                                <%= subtotal %>
+                            </td>
+                            <td>
+                                <!--削除ボタン-->
+                                <%= link_to "削除する", cart_item_path(cart_item.id, cart_item), method: :delete,class: "btn btn-danger" %>
+                            </td>
+                        </tr>
+                        <!--アイテムごとに合計金額に加算する-->
+                        <% total += subtotal %>
+                	<% end %>
             	<% end %>
             </table>
         </div>
     </div>
     <div class='row'>
         <div class='col-3'>
-            <button type="submit" class="btn btn-primary btn-sm">
-                <%= link_to "買い物を続ける" %>
-                <!--link_to "買い物を続ける", items_path, method: :get %>-->
-            </button>
+            <%= link_to "買い物を続ける", items_path, method: :get ,class:"btn btn-primary btn-sm"%>
         </div>
         <div class='col-3 offset-6'>
             <table class='table table-bordered'>
@@ -67,10 +63,8 @@
     </div>
     <div class='row justify-content-center'>
         <div class='col-3 offset-4'>
-            <button type="submit" class="btn btn-success">
-                <%= link_to "情報入力に進む"%>
-                <!--link_to "情報入力に進む", new_order_path(cart_item), method: :new %>-->
-            </button>
+            <%= link_to "情報入力に進む", items_path,class:"btn btn-success"%>
+            <!--link_to "情報入力に進む", new_order_path(cart_item), method: :new %>-->
         </div>
     </div>
 </div>
