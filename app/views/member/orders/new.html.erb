@@ -4,6 +4,7 @@
         <div class="col">
             <%= form_with model: @order, url: "/orders/confirm", method: :post, local: true do |f| %>  
                 <%= "支払い方法" %>  
+
                 <br>  
                     <%= f.radio_button :payment_method,:クレジットカード,  checked: "checked" %>  
                     <%= f.label :payment_method, "クレジットカード" %>  

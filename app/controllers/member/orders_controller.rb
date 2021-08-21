@@ -33,7 +33,6 @@ class Member::OrdersController < ApplicationController
         
     # 注文情報保存
     def create
-        
     end
     # ありがとうページ
     def thanx
