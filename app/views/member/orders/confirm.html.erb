@@ -1,0 +1,8 @@
+<h4>注文情報確認</h4>
+  <br>支払い方法
+    <%= @order.payment_method %> 
+  <br>お届け先
+    <%= form_with model: @order, local: true do |f| %>
+      <%= f.hidden_field :shipping_address %>
+      <!--見た目は何もでない、表示させなくても良いようなデータ-->
+    <% end %>
