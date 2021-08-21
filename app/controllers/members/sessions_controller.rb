@@ -1,7 +1,16 @@
 # frozen_string_literal: true
 
 class Members::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+ #Sbefore_action :configure_sign_in_params, only: [:create]
+   #def reject_inactive_user
+    #@member = Member.find_by(name: params[:member][:name])
+    #if @member
+     # if @member.is_deleted_password?(params[:member][:password]) && !@member.is_valid
+        #redirect_to new_user_session_path
+      #end
+   #end
+  # end
+
 
   # GET /resource/sign_in
   # def new
