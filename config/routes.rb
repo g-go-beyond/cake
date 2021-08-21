@@ -24,11 +24,11 @@ Rails.application.routes.draw do
       #   delete ’all_destroy’
       # end
     end
-    
+  
     resources :orders,only: [:new,:create,:index,:show] do
       collection do
-      get 'thanx'
-      post 'confirm'
+        get 'thanx'
+        post 'confirm'
       end
     end
 
