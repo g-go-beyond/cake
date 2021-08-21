@@ -6,12 +6,12 @@ Rails.application.routes.draw do
  
   scope module: :member do
     resources :addresses, :except => [:new]  
-      # resources :members,only: [:show,:edit,:update] do
-      #   collection do
-      #     get ’unsubscribe’
-      #     patch ’withdraw’
-      #   end
-      # end
+    resources :members,only: [:show,:edit,:update] do
+      collection do #id付与はしない
+        get 'unsubscribe' #退会画面
+        patch 'withdraw' #is_deletedを更新する
+      end
+    end
     resources :items,only: [:show,:index] do
       # collection do
       #   get ’top’
