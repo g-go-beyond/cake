@@ -25,11 +25,11 @@ Rails.application.routes.draw do
       # end
     end
     
-    resources :orders,only: [:show,:edit,:update,:create] do
-      # collection do
-      # get ’thanx’
-      # post ’confirm’
-      # end
+    resources :orders,only: [:new,:create,:show,:index] do
+      collection do
+      get 'thanx'
+      post 'confirm'
+      end
     end
 
   end
