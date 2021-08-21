@@ -23,16 +23,13 @@ class Member::MembersController < ApplicationController
   end
 
   def unsubscribe
-    @member = Member.find_by(name: params[:name])
   end
 
   def withdraw
-    @member = member.find_by(name: params[:name])
-    #@member = current_member
-    @member.update(is_deleted: true)
+    member = current_member
+    member.update(is_deleted: true) 
     reset_session #データをリセットする
-    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-    redirect_to member_path(current_member) #トップ画面へ
+    redirect_to new_member_registration_path
   end
 
 

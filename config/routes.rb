@@ -7,13 +7,13 @@ Rails.application.routes.draw do
  get 'about' => 'member/items#about'
   scope module: :member do
     resources :addresses, :except => [:new]  
-      # resources :members,only: [:show,:edit,:update] do
-      #   collection do
-      #     get ’unsubscribe’
-      #     patch ’withdraw’
-      #   end
-      # end
-    resources :items,only: [:show,:index] 
+    resources :members,only: [:show,:edit,:update] do
+      collection do #id付与はしない
+        get 'unsubscribe' #退会画面
+        patch 'withdraw' #is_deletedを更新する
+      end
+    end
+    resources :items,only: [:show,:index]
 
     resources :cart_items,only: [:index,:create,:update,:destroy] do
       collection do
