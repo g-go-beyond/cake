@@ -87,11 +87,11 @@ ActiveRecord::Schema.define(version: 2021_08_21_044803) do
     t.integer "member_id", null: false
     t.integer "postage", null: false
     t.integer "total_payment", null: false
-    t.integer "payment_method", null: false
+    t.integer "payment_method", null: false, default: 0
     t.string "sipping_name", null: false
     t.string "shipping_address", null: false
     t.string "shipping_post_code", null: false
-    t.integer "status", null: false
+    t.integer "status", null: false, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
