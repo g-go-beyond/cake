@@ -19,8 +19,8 @@
                 <br>
                     <%= current_member.post_code %>
                     <%= current_member.address %>
-                    <%= current_member.first_name %>
                     <%= current_member.last_name %>
+                    <%= current_member.first_name %>
                 <br>  
                     <%= f.radio_button :address_option, 1 %>  
                     <%= f.label :order_address, "登録済住所から選択" %>
@@ -30,8 +30,8 @@
                     <%= f.radio_button :address_option, 2 %>
                     <%= f.label :order_address, "新しいお届け先" %> 
                 <br>
-                    <%= f.label :postage, "郵便番号" %>  
-                    <%= f.text_field :postage %>
+                    <%= f.label :shipping_post_code, "郵便番号" %>  
+                    <%= f.text_field :shipping_post_code %>
                 <br>  
                     <%= f.label :shipping_address, "住所" %>
                     <%= f.text_field :shipping_address %>
