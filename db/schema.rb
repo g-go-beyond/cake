@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2021_08_21_044803) do
   end
 
   create_table "cart_items", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "member_id"
-    t.integer "item_id"
-    t.integer "quantity"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -79,6 +79,11 @@ ActiveRecord::Schema.define(version: 2021_08_21_044803) do
   end
 
   create_table "ordered_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", null: false
+    t.integer "making_status", null: false
+    t.integer "tax_included_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -87,11 +92,11 @@ ActiveRecord::Schema.define(version: 2021_08_21_044803) do
     t.integer "member_id", null: false
     t.integer "postage", null: false
     t.integer "total_payment", null: false
-    t.integer "payment_method", null: false, default: 0
-    t.string "sipping_name", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.string "shipping_name", null: false
     t.string "shipping_address", null: false
     t.string "shipping_post_code", null: false
-    t.integer "status", null: false, default: 0
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
