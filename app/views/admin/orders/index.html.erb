@@ -1,30 +1,28 @@
-<h2>注文履歴一覧</h2>
-<table>
-  <tr>
-   <th>購入日時</th>
-   <th>購入者</th>
-   <th>購入個数</th>
-   <th>注文ステータス </th>
-  </tr>
-  <%= @orders.each do |order|%>
-    <tr>
-       <td>
-         <%= link_to admin_order_path do%>
-          <%= order.created_at %>
-         <%end%>
-       </td>
-       <td>
-         <%= order.member.last_name%>
-         <%= order.member.first_name%>
-        </td>
-        <td>
-         <%= ordered_items.count%>
-        </td>
-        <td>
-          <%= order.status %>
-        </td>
-    </tr>
-  <%end%>
-</table>
-
-<%= paginate(@orders) %>
+<h2>admin注文履歴一覧</h2>
+            <table class='table table-bordered'>
+                <tr class="table-secondary">
+                    <th>購入日時</th>
+                    <th>購入者</th>
+                    <th>購入個数</th>
+                    <th>注文ステータス </th>
+                </tr>
+                <tr>
+                    <% @order.each do |order|%>
+                    <td>
+                        <%= link_to admin_order_path(order.id) do%>
+                        <%= order.created_at.strftime('%Y/%m/%d') %>
+                        <%end%>
+                    </td>
+                    <td>
+                        <%= order.member.last_name%>
+                        <%= order.member.first_name%>様
+                    </td>
+                    <td>
+                     <!--< %= order.ordered_item.quantity %>-->
+                    </td>
+                    <td>
+                        <%= order.status %>
+                    </td>
+                    <%end%>
+                </tr>
+            </table>
