@@ -32,7 +32,7 @@ class Admin::ItemsController < ApplicationController
   # 商品編集
   def edit
     @item = Item.find(params[:id])
-    @genre = Genre.find(params[:id])
+    #@genre = Genre.find(params[:id])
     @genres = Genre.all
   end
   
@@ -51,6 +51,8 @@ class Admin::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:genre_id, :name, :description, :image, :price, :is_active)
   end
+  
+  
   
   # def move_to_index
   #   unless admin_admin_signed_in?

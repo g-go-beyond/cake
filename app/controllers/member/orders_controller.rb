@@ -7,6 +7,11 @@ class Member::OrdersController < ApplicationController
     # 注文情報入力確認画面
     def confirm
         @order = Order.new(order_params)
+        @cart_items = CartItem.where(member_id: current_member.id) #自身のカートから買った商品情報を取得代入
+        
+        
+        #@order = Order.new(order_params)
+        
         # @orderはでかい箱で、その中に小さい箱を指定するためにストロングパラメーターを指定している。
         
         # if文を記述して、hidden fieldが作動するようにする。
@@ -40,7 +45,33 @@ class Member::OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.member_id = current_member.id
         @order.save
+        
+        # カート商品の情報を注文商品に移動
+        #current_member.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
+        #@ordered_item = OrderedItem.new #初期化宣言
+        #@ordered_item.item_id = cart_item.item_id #商品idを注文商品idに代入
+        #@ordered_item.quantity = cart_item.quantity #商品の個数を注文商品の個数に代入
+        #@ordered_item.tax_included_price = (cart_item.item.price*1.1).floor #消費税込みに計算して代入
+        #@ordered_item.order_id =  @order.id #注文商品に注文idを紐付け
+        #@ordered_item.save #注文商品を保存
+        #end
+        
+       @cart_items = CartItem.where(member_id: current_member.id)
+       @cart_items.each do |cart_item|
+       OrderedItem.create(
+       item:  cart_item.item,
+       order:    @order,
+       quantity: cart_item.quantity,
+       tax_included_price: cart_item.item.price
+    )
+    end
+        @cart_items.destroy_all
+        
         redirect_to thanx_orders_path
+        #     )
+        # end
+        # # 注文完了後、カート商品を空にする
+        # @cart_items.destroy_all
     end
     # ありがとうページ
     def thanx
@@ -53,11 +84,13 @@ class Member::OrdersController < ApplicationController
     # 注文情報詳細 
     def show
         @order = Order.find(params[:id])
+        @ordered_items = @order.ordered_items
     end
     
     private
     def order_params
-        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id)
+        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id,:total_payment,:status)
+        
     end
     
 end
