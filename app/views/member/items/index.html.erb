@@ -1,0 +1,7 @@
+<h1>商品一覧(全<%= @items.count %>件)</h1>
+<% @items.first(4).each do |item|%>
+<div class><%= attachment_image_tag(item, :image, fallback: "no_image.jpg", size: "80x100") %></div>
+ <p><%= link_to item.name, item_path(item.id) %></p>
+ <p><%= item.description %></p>
+ <p>￥<%= (item.price*1.08).to_i %>(税込)</p>
+<% end %>
