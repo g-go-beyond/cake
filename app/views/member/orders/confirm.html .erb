@@ -1,0 +1,43 @@
+<h4>注文情報確認</h4>
+  <br>注文商品
+ 
+    <table>
+       <%= @cart_items.each do |cart| %>
+          <tr>
+            <td class="text-left">
+              <%= attachment_image_tag(cart.product, :image, size: "60x50", fallback: "no_image.jpg") %>
+              <%= cart.product.name %>
+            </td>
+            <td class="text-right">
+              <%= tax_price(cart.product.tax_out_price).to_s(:delimited) %>
+            </td>
+            <td class="text-right">
+                <%= cart.quantity %>
+            </td>
+            <td class="text-right">
+              <%= sub_price(cart).to_s(:delimited) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  <br>支払い方法
+    <%= @order.payment_method %> 
+  <br>お届け先
+    <%= @order.shipping_post_code %>
+    <%= @order.shipping_address %>
+    <%= @order.shipping_name %>
+      
+
+    <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+      <%= f.hidden_field :member_id %>
+      <%= f.hidden_field :postage %>
+      <%= f.hidden_field :total_payment %>
+      <%= f.hidden_field :payment_method %>
+      <%= f.hidden_field :shipping_name %>
+      <%= f.hidden_field :shipping_address %>
+      <%= f.hidden_field :shipping_post_code %>
+      <%= f.hidden_field :status %>
+      <%= f.submit "注文を確定する", class: "btn btn-warning center-block col-xs-5" %>
+    <% end %>

@@ -7,7 +7,8 @@ class Member::OrdersController < ApplicationController
     # 注文情報入力確認画面
     def confirm
         @order = Order.new(order_params)
-        # @orderはでかい箱で、その中に小さい箱を指定するためにストロングパラメーターを指定している。
+        # @orderはでかい箱で、その中に小さい箱を指定するためにストロングパラメーターを指定している.
+        
         
         # if文を記述して、hidden fieldが作動するようにする。
         # ご自身の住所と配送先住所が選択された場合はhiddenで処理
@@ -34,8 +35,7 @@ class Member::OrdersController < ApplicationController
             render 'new'
         end
         
-        @cart_items = current_member.cart_items.all
-        @order.member_id = current_member.id
+        @cart_item = cart_item.all
     end
         
     # 注文情報保存
@@ -43,19 +43,6 @@ class Member::OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.member_id = current_member.id
         @order.save
-        
-        #ordered_itmemの保存
-        current_member.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
-        @order_item = OrderedItem.new #初期化宣言
-        @order_item.order_id =  @order.id #注文商品に注文idを紐付け
-        @order_item.item_id = cart_item.item_id #商品idを注文商品idに代入
-        @order_item.quantity = cart_item.quantity #商品の個数を注文商品の個数に代入
-        @order_item.tax_included_price = cart_item.item.price*1.1 #消費税込みに計算して代入
-        @order_item.save #注文商品を保存
-        end #ループ終わり
-        
-        # # 注文完了後、カート商品を空にする
-        current_member.cart_items.destroy
         redirect_to thanx_orders_path
     end
     # ありがとうページ
@@ -69,12 +56,11 @@ class Member::OrdersController < ApplicationController
     # 注文情報詳細 
     def show
         @order = Order.find(params[:id])
-        # @order_details = @order.order_details
     end
     
     private
     def order_params
-        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id,:total_payment,:status)
+        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id)
     end
     
 end
