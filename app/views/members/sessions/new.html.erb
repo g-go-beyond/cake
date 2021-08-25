@@ -7,8 +7,9 @@
     <div class='row'>
         <div class='col-8 offset-2'>
             <h5 class='pt-3'>会員の方はこちらからログイン</h5>
-            <table  class='table table-borderless'>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <!--formはtable外に出さないとログインができなくなってしまう-->
+            <table  class='table table-borderless'>
                 <tr>
                     <td class='col-3'>メールアドレス</td>
                     <td>
@@ -38,8 +39,8 @@
                         <%= f.submit "ログイン",class:"btn btn-primary w-50" %>
                     </td>
                 </tr>
-            <% end %>
             </table>
+            <% end %>
         </div>
     </div>
     <div class='row'>

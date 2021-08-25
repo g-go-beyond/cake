@@ -1,8 +1,10 @@
 class Member::OrdersController < ApplicationController
+    before_action :authenticate_member!
+
     # 注文情報入力画面
     def new
         @order = Order.new
-        @adress = Address.all
+        @addresses = current_member.addresses.all
     end
     # 注文情報入力確認画面
     def confirm
