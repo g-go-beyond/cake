@@ -1,21 +1,29 @@
-<h1>配送先編集</h1>
-<%= form_with model: @address, url:address_path(@address), local:true do |f| %>
-  <div class="field">
-   <%= f.label :郵便番号（ハイフンなし） %>
-   <%= f.text_field :post_code, autofocus: true, autocomplete: "post_code" %>
-  </div>
+<div "container">
+    <div class='row'>
+        <div class='col-8 offset-2'>
+         <h4 class="pt-3">配送先編集</h4>
+          <%= form_with model: @address, url:address_path(@address), local:true do |f| %>
+           <table class="table table-borderless mt-5">
+            <tr><div class="field">
+             <th><%= f.label :郵便番号（ハイフンなし） %></th>
+             <td><%= f.text_field :post_code, autofocus: true, autocomplete: "post_code" %></td>
+            </div>
+            </tr>
   
-  <div class="field"> 
-   <%= f.label :住所 %>
-   <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-  </div>
+           <tr><div class="field"> 
+            <th><%= f.label :住所 %></th>
+            <td><%= f.text_field :address, autofocus: true, autocomplete: "address", :size=>"60" %></td>
+           </div>
+           </tr>
   
-  <div class="field"> 
-   <%= f.label :宛名 %>
-   <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-  
-  <div class="field">
-   <%= f.submit "変更内容を保存" %>
-  </div>
-<% end %>
+           <tr><div class="field"> 
+            <th><%= f.label :宛名 %></th>
+            <td><%= f.text_field :name, autofocus: true, autocomplete: "name" %></td>
+            <td><%= f.submit "変更内容を保存", class:"btn btn-success"%></td>
+           </div>
+           </tr>
+          <% end %>
+          </table>
+       </div>
+   </div>
+</div>     
