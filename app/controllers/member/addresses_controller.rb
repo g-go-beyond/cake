@@ -1,7 +1,9 @@
 class Member::AddressesController < ApplicationController
+    before_action :authenticate_member!
+
     def index
      @address = Address.new
-     @addresses = Address.all
+     @addresses = current_member.addresses.all
     end
     
     def create

@@ -1,8 +1,10 @@
 class Member::OrdersController < ApplicationController
+    before_action :authenticate_member!
+
     # 注文情報入力画面
     def new
         @order = Order.new
-        @adress = Address.all
+        @addresses = current_member.addresses.all
     end
     # 注文情報入力確認画面
     def confirm
@@ -33,6 +35,9 @@ class Member::OrdersController < ApplicationController
         else
             render 'new'
         end
+        
+        @cart_items = current_member.cart_items.all
+        @order.member_id = current_member.id
     end
         
     # 注文情報保存
@@ -40,9 +45,21 @@ class Member::OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.member_id = current_member.id
         @order.save
+        
+        # ordered_itmemの保存
+        current_member.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
+          @ordered_item = OrderedItem.new #初期化宣言
+          @ordered_item.item_id = cart_item.item_id #商品idを注文商品idに代入
+          @ordered_item.quantity = cart_item.quantity #商品の個数を注文商品の個数に代入
+          @ordered_item.tax_included_price = (cart_item.item.price*1.08).floor #消費税込みに計算して代入
+          @ordered_item.order_id =  @order.id #注文商品に注文idを紐付け
+          @ordered_item.save #注文商品を保存
+        end #ループ終わり
+
+        current_member.cart_items.destroy_all #カートの中身を削除
         redirect_to thanx_orders_path
     end
-    # ありがとうページ
+    # 注文完了画面
     def thanx
     end
     
@@ -53,11 +70,12 @@ class Member::OrdersController < ApplicationController
     # 注文情報詳細 
     def show
         @order = Order.find(params[:id])
+        @ordered_items = @order.ordered_items
     end
     
     private
     def order_params
-        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id)
+        params.require(:order).permit(:postage, :payment_method, :shipping_name, :shipping_address, :shipping_post_code ,:member_id,:total_payment,:status)
     end
     
 end

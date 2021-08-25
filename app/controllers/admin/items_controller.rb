@@ -24,7 +24,6 @@ class Admin::ItemsController < ApplicationController
       @items = Item.all
       render 'index'
     else
-      @item = Item.new
       render 'new'
     end
   end
@@ -42,7 +41,7 @@ class Admin::ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to admin_item_path(@item), notice: "You have updated item successfully."
     else
-      render "edit"
+      render "index"
     end
   end
  

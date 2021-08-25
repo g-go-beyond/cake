@@ -5,6 +5,10 @@ class Item < ApplicationRecord
     belongs_to :genre
     attachment :image
     
-    
-    
+    validates :image, presence: true
+    validates :name, presence: true
+    validates :description, presence: true
+    validates :genre, presence: true
+    validates :price, presence: true
+
 end

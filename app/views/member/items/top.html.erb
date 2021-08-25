@@ -1,21 +1,45 @@
-<p>ようこそ、ながのCAKEへ！</br>
-このサイトでは、ケーキ販売のECサイトになります。</br>
-会員でないkたも商品の閲覧はできますが、</br>
-購入には会員登録が必要になります。</p>
-<h2>新着商品</h2>
-<% @items.first(3).each do |item|%>
-  <p>
-    <%= link_to item_path(item) do %>
-     <%= attachment_image_tag(item, :image, fallback: "no_image.jpg", size: "100x100")%>
-    <%end%>
-  </p>
-  <p>商品名　<%=item.name%></p>
-  <p>
-    <% if item.is_active == TRUE %>
-     税込￥<%= (item.price*1.08).to_i %>
-    <% else %><!--modelにて設定↑-->
-     "sorry!sold out!"
-    <% end %>
-  </p>
-<% end %>
-<%= link_to "全ての商品を見る", items_path %>
+<div class='container'>
+    <div class='row mb-5'>
+        <div class='col-12'>
+            <div class="jumbotron h-100" style="color:#FFF; background:url(6.jpg); background-size:cover;">
+                <!--background-image:url(https://www.pakutaso.com/shared/img/thumb/PED_oomurozannosancyou_TP_V.jpg);-->
+                <!--<h1 class="display-4">幅一杯にジャンボトロン</h1>-->
+                <p class="lead">
+                    ようこそ、ながのCAKEへ！</br>
+                    このサイトは、ケーキ販売のECサイトになります。</br>
+                    会員でない方も商品の閲覧はできますが、</br>
+                    購入には会員登録が必要になります。
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class='row my-5'>
+        <div class='col'>
+        </div>
+    </div>
+    <div class='row mt-5'>
+        <div class='col-10 offset-1'>
+            <h2>新着商品</h2>
+            <table>
+                <tr>
+                <% @items.first(4).each do |item|%>
+                    <td class="px-2">
+                    <%= link_to item_path(item) do %>
+                     <%= attachment_image_tag(item, :image, fallback: "no_image.jpg", size: "100x100",class: "d-block mx-auto")%>
+                    <%end%>
+                    <p>商品名　<%=item.name%></p>
+                    <p>
+                    <% if item.is_active == TRUE %>
+                     税込￥<%= (item.price*1.08).to_i %>
+                    <% else %><!--modelにて設定↑-->
+                     "sorry!sold out!"
+                    <% end %>
+                    </p>
+                    </td>
+                <% end %>
+                </tr>
+            </table>
+            <%= link_to "全ての商品を見る>", items_path %>
+        </div>
+    </div>
+</div>

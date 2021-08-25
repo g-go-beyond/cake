@@ -1,8 +1,12 @@
 <div class='container'>
   <div class='row'>
-    <div class='col'>
-      <h3>商品編集</h3>
-      <%= form_with model: @item, url: edit_admin_item_path, local: true do |f| %>
+      <div class="<col>">
+        <h3 class="px-5 py-2 mt-5 ml-5 bg-light text-dark">商品編集</h3>
+      </div>
+  </div>
+  <div class='row mt-3'>
+    <div class='col field d-flex justify-content-center'>
+      <%= form_with model: @item, url: admin_item_path, method: :patch,local: true do |f| %>
         <% if @item.errors.any? %>
           <%= @item.errors.count %> errors prohibited this item from being saved:<br>
             <% @item.errors.full_messages.each do |message| %>
@@ -18,13 +22,13 @@
           </td></tr>
           <tr><th>税抜価格</th><td><%= f.text_field :price %>円</td></tr>
           <tr><th>販売ステータス</th><td>
-                <%= f.radio_button :is_active, 1 %>
-                <%= f.label :is_active, "販売中", value:1%>
-                <%= f.radio_button :is_active, 2 %>
-                <%= f.label :is_active, "販売停止中", value:2%>
+                <%= f.radio_button :is_active, TRUE %>
+                <%= f.label :is_active, "販売中" %>
+                <%= f.radio_button :is_active, FALSE %>
+                <%= f.label :is_active, "販売停止中" %>
               </td></tr>
           <tr><th></th><td>
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success btn-lg">
               <% f.submit %>変更を保存
             </button>
           </td></tr>
