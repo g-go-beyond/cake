@@ -26,9 +26,9 @@ class Admin::OrdersController < ApplicationController
         @ordered_items = @order.ordered_items # 注文商品から注文商品テーブルの呼び出し
         @order.update(order_params)# 注文ステータスの更新、更新するカラムはstatus
         # 紐づく注文ステータスが「入金確認」に更新されていたら
-        if @order.status == 1
+        if @order.status == "入金確認"
             # 制作ステータスを全ての商品に対して「製作待ち」に自動更新
-            @ordered_items.update_all(making_status: 1)
+            @ordered_items.update_all(making_status: "製作待ち")
         end
         redirect_to admin_order_path(@order)
     end

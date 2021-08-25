@@ -1,24 +1,28 @@
- <%= attachment_image_tag(@item, :image, fallback: "no_image.jpg", size: "100x100") %>
- <h1 class ="item"><%= @item.name %><h1>
- <div class = "item">
-  <%= @item.description %>
- </div>
- <div class = "item">
-   <% if @item.is_active == TRUE %>
-    ￥<%= (@item.price*1.08).to_i %>(税込)
-   <% else %> <!--modelにてdef設定↑-->
-    "sorry!sold out!"
-   <% end %>
- </div>
- <div>
-  <% if @item.is_active == TRUE %>
-   <%= form_with(model: @cart_item,url: cart_items_path, method: :post,local: true)do |f| %>
-    <%= f.label :quantity, "個数選択" %>
-    <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10] %><!--個数指定ない-->
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <%= f.submit "カートに入れる", class: "btn btn-success" %>
-   <% end %>
-  <%else%>
-   <p>"sorry!sold out!"</p>
-  <% end %>
- </div>
+ <div "container">
+    <div class='row pt-5'>
+        <div class='col-4 offset-2'>
+            <%= attachment_image_tag(@item, :image, fallback: "no_image.jpg", class: "img-fluid") %>
+        </div>
+        <div class='col-4'>
+            <h2 class="font-weight-bold"><%= @item.name %><h2>
+            <h4 class='py-5'><%= @item.description %></h4>
+            <h2 class='py-5'>
+            <% if @item.is_active == TRUE %>
+            ￥<%= (@item.price*1.08).to_i %>(税込)
+            <% else %> <!--modelにてdef設定↑-->
+            申し訳ありません。<span class="text-danger">在庫切れ</span>の商品です。
+            <% end %>
+            </h2>
+            <h4>
+            <% if @item.is_active == TRUE %>
+                <%= form_with(model: @cart_item,url: cart_items_path, method: :post,local: true)do |f| %>
+                    <%= f.label :quantity, "個数選択" %>
+                    <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10] %><!--個数指定ない-->
+                    <%= f.hidden_field :item_id, :value => @item.id %>
+                    <%= f.submit "カートに入れる", class: "btn btn-success" %>
+                <% end %>
+            <% end %>
+            </h4>
+        </div>
+    </div>
+</div>
