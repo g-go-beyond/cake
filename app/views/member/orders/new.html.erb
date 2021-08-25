@@ -28,7 +28,7 @@
                     <%= f.radio_button :address_option, 1 %>  
                     <%= f.label :order_address, "登録済住所から選択" %>
                 <br>
-                    <%= f.collection_select :member_id, Address.all, :id, :full_adresses %>
+                    <%= f.collection_select :member_id, @addresses, :id, :full_adresses %>
                 <br>
                     <%= f.radio_button :address_option, 2 %>
                     <%= f.label :order_address, "新しいお届け先" %> 
@@ -46,10 +46,11 @@
                         <td class='col-9'><%= f.text_field :shipping_name, :placeholder => "山田花子" %></td>
                     </tr>
                 </table>
+                    <div class="row justify-content-center py-5">
+                        <%= f.submit "確認画面へ進む" , class:"btn btn-primary" %>
+                    </div>
+                <% end %>
         </div>
     </div>
-    <div class="row justify-content-center py-5">
-        <%= f.submit "確認画面へ進む" , class:"btn btn-primary" %>
-        <% end %>
-    </div>
+
 </div>
