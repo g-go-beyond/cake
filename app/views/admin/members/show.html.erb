@@ -1,44 +1,65 @@
-<h1><%= @member.last_name %><%= @member.first_name %>さんの会員詳細</h1>
+<div "container">
+ <div class='row'>
+  <div class='col offset-3'>
+   <h4 class="col-5 bg-light">
+    <%= @member.last_name %><%= @member.first_name %>さんの会員詳細
+   </h4>
+  </div>
+ </div>
+ <div class='row'>
+  <div class='col offset-3'>
+   <table class="table table-borderless">
+    <tr>
+     <th class='col-2'>会員ID</th>
+     <td><%= @member.id %></td>
+     <td></td>
+    </tr>
+    <tr>
+     <th class='col-2'>氏名</th>
+     <td><%= @member.last_name %><%= @member.first_name %></td>
+    </tr>
+    <tr>
+     <th class='col-2'>フリガナ</th>
+     <td><%= @member.last_name_kana %><%= @member.first_name_kana %></td>
+    </tr>
+    <tr>
+     <th class='col-2'>郵便番号</th>
+     <td><%= @member.post_code %></td>
+    </tr>
+    <tr>
+     <th class='col-2'>住所</th>
+     <td ><%= @member.address %></td>
+    </tr>
+    <tr>
+     <th class='col-2'>電話番号</th>
+     <td><%= @member.phone_number %></td>
+    </tr>
+    <tr>
+     <th class='col-2'>メールアドレス</th>
+     <td><%= @member.email %></td>
+    </tr>
+    <tr>
+    <th class='col-2'>会員ステータス</th>
+    <td>
+     <% if @member.is_deleted == true %>
+      <p class = "text-secondary">退会</p>
+     <% else %>
+      <p class = "text-success">有効</p>
+     <% end %>
+    </td>
+    <td></td>
+   </tr>
+   <tr>
+    <th></th>
+    <td>
+     <%= link_to "編集する", edit_admin_member_path(@member),class: "btn btn-success"%>
+    </td>
+    <td>
+     <%= link_to "注文履歴一覧を表示する", admin_orders_path(@member),class:"btn btn-primary"%>
+    </td>
+   </tr>
+   </table>
+  </div>
+ </div>
+</div>
 
-<table>
- <tr>
-  <th>会員ID</th>
-  <td><%= @member.id %></td>
- </tr>
- <tr>
-  <th>氏名</th>
-  <td><%= @member.last_name %><%= @member.first_name %></td>
- </tr>
- <tr>
-  <th>フリガナ</th>
-  <td><%= @member.last_name_kana %><%= @member.first_name_kana %></td>
- </tr>
- <tr>
-  <th>郵便番号</th>
-  <td><%= @member.post_code %></td>
- </tr>
- <tr>
-  <th>住所</th>
-  <td><%= @member.address %></td>
- </tr>
- <tr>
-  <th>電話番号</th>
-  <td><%= @member.phone_number %></td>
- </tr>
- <tr>
-  <th>メールアドレス</th>
-  <td><%= @member.email %></td>
- </tr>
- <tr>
-<th>会員ステータス</th>
-<td> <% if @member.is_deleted == true %>
-   <p>退会</p>
-        <% else %>
-        <p>有効</p>
-        <% end %>
-</td>
- </tr>
-</table>
-
-<%= link_to "編集する", edit_admin_member_path(@member) %><br>
-<%= link_to "注文履歴一覧", admin_orders_path(@member) %>
