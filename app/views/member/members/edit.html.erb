@@ -1,45 +1,60 @@
-<h2>登録情報編集</h2>
-<%= form_with url:member_path, model:@member,local:true do |f| %>
-<table>
-  <tr>
-   <th>氏名</th>
-   <td>
-     <%= f.text_field:last_name %>
-     <%= f.text_field:first_name %>
-   </td>
-  </tr>
-  <tr>
-    <th>カナ</th>
-    <td>
-      <%= f.text_field:last_name_kana %>
-      <%= f.text_field:first_name_kana %>
-    </td>
-  </tr>
-  <tr>
-    <th>郵便番号</th>
-    <td>
-      <%= f.text_field:post_code %>
-    </td>
-  </tr>
-  <tr>
-    <th>住所</th>
-    <td>
-      <%= f.text_area:address %>
-    </td>
-  </tr>
-  <tr>
-    <th>電話番号</th>
-    <td>
-      <%= f.text_field:phone_number %>
-    </td>
-  </tr>
-  <tr>
-    <th>メールアドレス</th>
-    <td>
-      <%= f.text_field:email %>
-    </td>
-  </tr>
-</table>
-　 <p><%= f.submit "編集内容を保存" %></p>
-<% end %>
-   <%= link_to "退会する", unsubscribe_members_path, class:'btn btn-danger'%>
+<div "container">
+    <div class='row'>
+        <div class='col-8 offset-2'>
+
+         <h4>会員情報編集</h4>
+          <%= form_with url:member_path, model:@member,local:true do |f| %>
+        
+         <table class="table table-borderless">
+          <tr><div> 
+           <th>氏名</th>
+           <td><%= f.text_field:last_name %></td>
+           <td><%= f.text_field:first_name %></td>
+           </div>
+          </tr>
+  
+         <tr><div class="field"> 
+          <th>フリガナ</th>
+          <td><%= f.text_field:last_name_kana %></td>
+          <td><%= f.text_field:first_name_kana %></td>
+          </div>
+         </tr>
+  
+         <tr><div class="field"> 
+          <th>郵便番号</th>
+          <td><%= f.text_field:post_code %></td>
+          <td></td>
+          </div>
+         </tr>
+  
+         <tr><div class="field"> 
+          <th>住所</th>
+          <td class:"colspan=2"><%= f.text_area:address, :size=>"60" %></td>
+          </div>
+         </tr>
+  
+         <tr><div class="field"> 
+          <th>電話番号</th>
+          <td><%= f.text_field:phone_number %></td>
+          <td></td>
+          </div>
+         </tr>
+ 
+         <tr><div class="field"> 
+          <th>メールアドレス</th>
+          <td><%= f.text_field:email %></td>
+          <td></td>
+          </div>
+         </tr>
+       
+　       <tr><div>
+　         <th></th>
+　         <td class="d-flex justify-content-around pt-5"><%= f.submit "編集内容を保存", class:'btn btn-success' %>
+            <% end %>
+            <%= link_to "退会する", unsubscribe_members_path, class:'btn btn-danger'%></td>
+          </div>
+          </tr>
+       </table>
+     </div>
+  </div>
+</div>
