@@ -10,7 +10,6 @@ class Member::MembersController < ApplicationController
 
   def edit
     @member = current_member
-    #@member = Member.find(params[:id])
   end
 
   def update
@@ -35,6 +34,6 @@ class Member::MembersController < ApplicationController
 
 
   def member_params
-    params.require(:member).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :phone_number, :postal_code, :address,:email)
+    params.require(:member).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :phone_number, :post_code, :address,:email)
   end
 end

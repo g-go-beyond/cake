@@ -22,7 +22,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       @items = Item.all
-      render 'index'
+      render 'show'
     else
       render 'new'
     end

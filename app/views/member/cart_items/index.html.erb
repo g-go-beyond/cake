@@ -30,7 +30,7 @@
                                 <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true, method: :patch do |f| %>
                                 <!--f.select :name, options_for_select(セレクトボックスで表示したい要素配列.map{|c|[セレクトボックスで表示される値, value属性値にセットしたい値, {追加属性記述}]}, 初期値のvalueを選択), {}, {class: 'hoge', id: 'hogehoge'}-->
                                      <!--f.select :quantity, options_for_select(@numbers.map{|c|selected: cart_item.quantity.to_i} ) %>-->
-                                    <!--<= f.number_field :quantity >-この記述をしていたのでマイナスで注文できていたが下記に変更->
+                                    <!-- f.number_field :quantity >-この記述をしていたのでマイナスで注文できていたが下記に変更-->
                                      <%= f.number_field :quantity, min: 1, max:10, id: "quantity_cart"%>
                                     <%= f.submit "変更",class: "btn btn-success" %>
                                 <% end %>

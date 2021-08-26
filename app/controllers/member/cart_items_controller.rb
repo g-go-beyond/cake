@@ -16,7 +16,7 @@ class Member::CartItemsController < ApplicationController
             redirect_to cart_items_path
         # カート内にその商品が入っていなかった場合は通常の保存処理 
         elsif @cart_item.save
-            @cart_items = current_member_cart_items.all
+            @cart_items = current_member.cart_items.all
             render 'index'
         # 保存できなかった場合
         else

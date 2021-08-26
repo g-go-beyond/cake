@@ -11,7 +11,6 @@ class Members::SessionsController < Devise::SessionsController
    #end
   # end
 
-
   # GET /resource/sign_in
   # def new
   #   super
