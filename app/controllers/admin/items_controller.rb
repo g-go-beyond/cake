@@ -31,8 +31,6 @@ class Admin::ItemsController < ApplicationController
   # 商品編集
   def edit
     @item = Item.find(params[:id])
-    @genre = Genre.find(params[:id])
-    @genres = Genre.all
   end
   
   # 商品更新
@@ -43,6 +41,8 @@ class Admin::ItemsController < ApplicationController
     else
       render "index"
     end
+    
+    
   end
  
   private
